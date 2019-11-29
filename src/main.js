@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import VModal from 'vue-js-modal'
 import axios from 'axios'
+import $ from 'jquery'
 
 Vue.use(VModal)
 axios.defaults.baseURL = '/api'
@@ -15,7 +16,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  $
 })
 
 export {App, router}

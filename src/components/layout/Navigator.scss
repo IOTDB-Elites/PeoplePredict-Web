@@ -5,10 +5,9 @@
 .nav-wrapper {
   height: 52px;
   width: 100%;
-  position: fixed;
   z-index: 1;
   background-color: $white-color;
-  box-shadow: 0px 1px 3px $light-grey;
+  box-shadow: 0 1px 3px $light-grey;
 
   .left-wrapper {
     display: inline-block;
@@ -31,31 +30,6 @@
       }
       .search-input /deep/ .el-input__icon {
         z-index: 1;
-      }
-    }
-    
-    .button-wrapper {
-      display: inline-block;
-      .el-button, .el-dropdown {
-        padding-left: 30px;
-        font-size: 15px;
-        font-weight: 400;
-        color: $grey;
-        @include transition(all .5s);
-
-        &:hover {
-          @include transition(all .5s);
-          color: $main-color;
-        }
-
-        img {
-          vertical-align: middle;
-          margin-right: 5px;
-        }
-
-        /deep/ .el-icon-caret-bottom:before {
-          font-size: 10px;
-        }
       }
     }
   }

@@ -22,7 +22,7 @@
 
 
 <script>
-  import { Input, Button, Dropdown, DropdownMenu, DropdownItem, Message } from 'element-ui'
+  import { Input, Button, Message } from 'element-ui'
   import { router } from '../../main'
 
   export default {
@@ -30,9 +30,6 @@
     components: {
       elInput: Input,
       elButton: Button,
-      elDropdown: Dropdown,
-      elDropdownMenu: DropdownMenu,
-      elDropdownItem: DropdownItem,
       Message
     },
     data () {

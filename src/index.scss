@@ -13,12 +13,12 @@ html {
   }
 
   .container {
-    width: 1005px;
+    width: 1300px;
     margin: 0 auto;
     @include clear-fix();
   }
 
-  @media (max-width: 1005px) {
+  @media (max-width: 1300px) {
     .container {
       width: 100%;
     }
@@ -38,6 +38,10 @@ html {
       border: $main-color solid 1px;
       color: $grey;
     }
+  }
+
+  .el-table__body td {
+    padding: 6px 0;
   }
 
   .el-input__icon {
