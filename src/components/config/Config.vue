@@ -109,14 +109,19 @@
       }
     },
     methods: {
-      ...mapActions('list', [
-        'fetchRankList'
+      ...mapActions('config', [
+        'fetchRankList',
+        'fetchMapData'
       ]),
-      ...mapMutations('list', [
-        'saveRankList'
+      ...mapMutations('config', [
+        'saveRankList',
+        'saveMapData',
+        'saveMaxData'
       ]),
       handleSearch () {
         this.saveRankList([])
+        this.saveMapData([])
+        this.saveMaxData(0)
         let config = {
           month: new Date(this.form.date).getMonth() + 1,
           day: new Date(this.form.date).getDate(),
@@ -124,6 +129,9 @@
           r: this.form.r
         }
         this.fetchRankList({
+          config: config
+        })
+        this.fetchMapData({
           config: config
         })
       }

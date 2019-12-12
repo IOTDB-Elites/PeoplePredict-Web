@@ -4,7 +4,7 @@
       <div class="container">
         <div class="map-wrapper">
           <div-header :header="'城市热力图'"></div-header>
-          <map></map>
+          <my-map></my-map>
         </div>
 
         <div class="right-wrapper">
@@ -26,7 +26,7 @@
 <script>
   import Layout from '../components/layout/Layout.vue'
   import DivHeader from '../components/DivHeader.vue'
-  import Map from '../components/chart/Map.vue'
+  import MyMap from '../components/chart/Map.vue'
   import Config from '../components/config/Config.vue'
   import RankTable from '../components/rank/RankTable.vue'
 
@@ -38,7 +38,7 @@
       Layout,
       Message,
       DivHeader,
-      Map,
+      MyMap,
       Config,
       RankTable
     },

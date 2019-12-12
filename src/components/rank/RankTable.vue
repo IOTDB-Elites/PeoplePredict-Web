@@ -7,7 +7,7 @@
       <el-table
         :data="rankList"
         stripe
-        height="250"
+        height="300"
         style="width: 100%">
         <el-table-column
           type="index"
@@ -43,7 +43,7 @@
       return {}
     },
     computed: {
-      ...mapState('list', {
+      ...mapState('config', {
         rankList: state => state.rankList
       })
     },
