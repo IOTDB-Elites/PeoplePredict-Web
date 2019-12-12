@@ -1,24 +1,29 @@
 <template>
   <div class="table-wrapper">
-    <el-table
-      :data="rankList === undefined ? [] : rankList"
-      stripe
-      height="250"
-      style="width: 100%">
-      <el-table-column
-        type="index"
-        width="50">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="地点"
-        width="230">
-      </el-table-column>
-      <el-table-column
-        prop="val"
-        label="人数">
-      </el-table-column>
-    </el-table>
+    <div v-if="rankList.length === 0" :style="{textAlign: 'center'}">
+      <img src="../../assets/img/loading.gif" width="200"/>
+    </div>
+    <div v-else>
+      <el-table
+        :data="rankList"
+        stripe
+        height="250"
+        style="width: 100%">
+        <el-table-column
+          type="index"
+          width="50">
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="地点"
+          width="230">
+        </el-table-column>
+        <el-table-column
+          prop="val"
+          label="人数">
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 
 </template>
@@ -45,5 +50,3 @@
     methods: {}
   }
 </script>
-
-<!--<style scoped src="./Config.css"></style>-->

@@ -5,7 +5,6 @@
         <div class="map-wrapper">
           <div-header :header="'城市热力图'"></div-header>
           <map></map>
-          <img src="../assets/img/map.png" width="750">
         </div>
 
         <div class="right-wrapper">

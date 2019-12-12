@@ -7,7 +7,7 @@ export function fetchRankList (callback, config) {
     params: {
       month: Number(config.month),
       day: Number(config.day),
-      hour: Number(config.time),
+      hour: config.time === '按天聚合' || config.time === '按周聚合' ? 7 : Number(config.time),
       aggregate: config.time === '按天聚合' ? 1 : config.time === '按周聚合' ? 2 : 0
     }
   })
