@@ -14,7 +14,7 @@
             <config></config>
           </div>
           <div class="rank-wrapper">
-            <div-header :header="'区域热度排名'"></div-header>
+            <div-header :header="'地点热度排名'"></div-header>
             <rank-table></rank-table>
           </div>
         </div>

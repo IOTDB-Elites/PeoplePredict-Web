@@ -1,22 +1,21 @@
 <template>
   <div class="table-wrapper">
     <el-table
-      :data="tableData"
+      :data="rankList === undefined ? [] : rankList"
       stripe
       height="250"
       style="width: 100%">
       <el-table-column
-        prop="rank"
-        label=""
-        width="90">
+        type="index"
+        width="50">
       </el-table-column>
       <el-table-column
         prop="name"
-        label="街道名"
-        width="150">
+        label="地点"
+        width="230">
       </el-table-column>
       <el-table-column
-        prop="num"
+        prop="val"
         label="人数">
       </el-table-column>
     </el-table>
@@ -27,6 +26,7 @@
 <script>
   import Vue from 'vue'
   import { Table, TableColumn } from 'element-ui'
+  import { mapState } from 'vuex'
 
   export default {
     name: 'RankTable',
@@ -35,49 +35,12 @@
       elTableColumn: TableColumn
     },
     data () {
-      return {
-        tableData: [{
-          rank: '1',
-          name: '北山街',
-          num: '3188'
-        }, {
-          rank: '2',
-          name: '灵隐街',
-          num: '3021'
-        }, {
-          rank: '3',
-          name: '西溪街',
-          num: '2987'
-        }, {
-          rank: '4',
-          name: '翠苑街',
-          num: '2666'
-        }, {
-          rank: '5',
-          name: '文新街',
-          num: '2199'
-        }, {
-          rank: '6',
-          name: '古荡街',
-          num: '1987'
-        }, {
-          rank: '7',
-          name: '西湖街',
-          num: '1969'
-        }, {
-          rank: '8',
-          name: '转塘街',
-          num: '1567'
-        }, {
-          rank: '9',
-          name: '留下街',
-          num: '876'
-        }, {
-          rank: '10',
-          name: '蒋村街',
-          num: '776'
-        }]
-      }
+      return {}
+    },
+    computed: {
+      ...mapState('list', {
+        rankList: state => state.rankList
+      })
     },
     methods: {}
   }

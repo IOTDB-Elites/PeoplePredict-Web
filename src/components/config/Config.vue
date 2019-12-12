@@ -5,11 +5,12 @@
         <el-date-picker
           v-model="form.date"
           type="date"
-          placeholder="选择日期">
+          placeholder="选择日期"
+          @change="handleSearch">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="时间节点">
-        <el-select v-model="form.time" placeholder="请选择">
+        <el-select v-model="form.time" placeholder="请选择" @change="handleSearch">
           <el-option-group
             v-for="group in form.timeOptions"
             :key="group.label"
@@ -24,7 +25,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="查看半径">
-        <el-select v-model="form.r" placeholder="请选择">
+        <el-select v-model="form.r" placeholder="请选择" @change="handleSearch">
           <el-option
             v-for="item in form.rOptions"
             :key="item.value"
@@ -41,6 +42,7 @@
 <script>
   import Vue from 'vue'
   import { Select, Form, Option, OptionGroup, FormItem, DatePicker, Message } from 'element-ui'
+  import { mapActions, mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'config',
@@ -70,19 +72,19 @@
           }, {
             label: '单点查询',
             options: [{
-              value: '7时',
+              value: '7',
               label: '7时'
             }, {
-              value: '12时',
+              value: '12',
               label: '12时'
             }, {
-              value: '15时',
+              value: '15',
               label: '15时'
             }, {
-              value: '20时',
+              value: '20',
               label: '20时'
             }, {
-              value: '21时',
+              value: '21',
               label: '21时'
             }]
           }],
@@ -106,9 +108,25 @@
         },
       }
     },
-    methods:
-      {}
+    methods: {
+      ...mapActions('list', [
+        'fetchRankList'
+      ]),
+      ...mapMutations('list', [
+        'saveRankList'
+      ]),
+      handleSearch () {
+        this.saveRankList([])
+        let config = {
+          month: new Date(this.form.date).getMonth() + 1,
+          day: new Date(this.form.date).getDate(),
+          time: this.form.time,
+          r: this.form.r
+        }
+        this.fetchRankList({
+          config: config
+        })
+      }
+    }
   }
 </script>
-
-<!--<style scoped src="./Config.css"></style>-->
