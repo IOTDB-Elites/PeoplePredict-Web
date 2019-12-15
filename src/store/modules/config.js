@@ -4,7 +4,8 @@ import * as mapApi from '../../api/map'
 const state = {
   rankList: [],
   mapData: [],
-  maxData: 0
+  maxData: 0,
+  configs: {}
 }
 
 // actions
@@ -32,6 +33,9 @@ const mutations = {
   },
   'saveMaxData' (state, maxData) {
     state.maxData = maxData
+  },
+  'saveConfig' (state, configs) {
+    state.configs = configs
   }
 }
 

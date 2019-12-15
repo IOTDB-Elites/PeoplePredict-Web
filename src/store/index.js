@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import config from './modules/config'
+import point from './modules/point'
 import createLogger from 'vuex/dist/logger'
 import BaiduMap from 'vue-baidu-map'
 
@@ -14,7 +15,8 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    config
+    config,
+    point
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

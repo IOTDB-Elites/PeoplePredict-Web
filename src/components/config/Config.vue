@@ -43,6 +43,7 @@
   import Vue from 'vue'
   import { Select, Form, Option, OptionGroup, FormItem, DatePicker, Message } from 'element-ui'
   import { mapActions, mapState, mapMutations } from 'vuex'
+  import { store } from '../../main'
 
   export default {
     name: 'config',
@@ -58,7 +59,7 @@
     data () {
       return {
         form: {
-          r: '50m',
+          r: '50',
           time: '按天聚合',
           timeOptions: [{
             label: '聚合查询',
@@ -89,19 +90,19 @@
             }]
           }],
           rOptions: [{
-            value: '50m',
+            value: '50',
             label: '50m'
           }, {
-            value: '100m',
+            value: '100',
             label: '100m'
           }, {
-            value: '200m',
+            value: '200',
             label: '200m'
           }, {
-            value: '500m',
+            value: '500',
             label: '500m'
           }, {
-            value: '1km',
+            value: '1000',
             label: '1km'
           }],
           date: '2019-08-30'
@@ -116,18 +117,27 @@
       ...mapMutations('config', [
         'saveRankList',
         'saveMapData',
-        'saveMaxData'
+        'saveMaxData',
+        'saveConfig'
+      ]),
+      ...mapMutations('point', [
+        'savePointData',
+        'saveStatistic'
       ]),
       handleSearch () {
-        this.saveRankList([])
-        this.saveMapData([])
-        this.saveMaxData(0)
         let config = {
           month: new Date(this.form.date).getMonth() + 1,
           day: new Date(this.form.date).getDate(),
           time: this.form.time,
-          r: this.form.r
+          radius: this.form.r
         }
+        this.saveConfig(config)
+
+        this.saveRankList([])
+        this.saveMapData([])
+        this.savePointData({pointData: [], statistic: null})
+        this.saveMaxData(0)
+
         this.fetchRankList({
           config: config
         })
