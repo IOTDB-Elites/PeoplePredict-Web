@@ -6,6 +6,7 @@
           v-model="form.date"
           type="date"
           placeholder="选择日期"
+          :picker-options="pickerOptions"
           @change="handleSearch">
         </el-date-picker>
       </el-form-item>
@@ -58,6 +59,11 @@
     },
     data () {
       return {
+        pickerOptions: {
+          disabledDate (time) {
+            return time.getTime() < new Date(2019, 7, 23, 0, 0, 0) || time.getTime() > new Date(2019, 8, 27, 0, 0, 0)
+          }
+        },
         form: {
           r: '50',
           time: '按天聚合',
