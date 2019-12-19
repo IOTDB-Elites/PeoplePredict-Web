@@ -1,6 +1,14 @@
 <template>
   <div class="config-wrapper">
     <el-form ref="form" :model="form" label-width="80px" size="mini">
+      <el-form-item>
+        <el-switch
+          v-model="form.heat"
+          active-text="热力图"
+          inactive-text="区划图"
+          @change="handleConfig">
+        </el-switch>
+      </el-form-item>
       <el-form-item label="选择日期">
         <el-date-picker
           v-model="form.date"
@@ -10,7 +18,7 @@
           @change="handleSearch">
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="时间节点">
+      <el-form-item label="时间节点" v-if="form.heat">
         <el-select v-model="form.time" placeholder="请选择" @change="handleSearch">
           <el-option-group
             v-for="group in form.timeOptions"
@@ -25,7 +33,7 @@
           </el-option-group>
         </el-select>
       </el-form-item>
-      <el-form-item label="查看半径">
+      <el-form-item label="查看半径" v-if="form.heat">
         <el-select v-model="form.r" placeholder="请选择" @change="handleSearch">
           <el-option
             v-for="item in form.rOptions"
@@ -42,7 +50,7 @@
 
 <script>
   import Vue from 'vue'
-  import { Select, Form, Option, OptionGroup, FormItem, DatePicker, Message } from 'element-ui'
+  import { Select, Form, Option, OptionGroup, FormItem, DatePicker, Message, Switch } from 'element-ui'
   import { mapActions, mapState, mapMutations } from 'vuex'
   import { store } from '../../main'
 
@@ -55,16 +63,18 @@
       elFormItem: FormItem,
       elOption: Option,
       elOptionGroup: OptionGroup,
+      elSwitch: Switch,
       Message
     },
     data () {
       return {
         pickerOptions: {
           disabledDate (time) {
-            return time.getTime() < new Date(2019, 7, 23, 0, 0, 0) || time.getTime() > new Date(2019, 8, 27, 0, 0, 0)
+            return time.getTime() < new Date(2019, 7, 23, 0, 0, 0) || time.getTime() > new Date(2019, 8, 23, 0, 0, 0)
           }
         },
         form: {
+          heat: false,
           r: '50',
           time: '按天聚合',
           timeOptions: [{
@@ -118,26 +128,22 @@
     methods: {
       ...mapActions('config', [
         'fetchRankList',
-        'fetchMapData'
+        'fetchMapData',
+        'fetchDistrictData'
       ]),
       ...mapMutations('config', [
         'saveRankList',
         'saveMapData',
         'saveMaxData',
-        'saveConfig'
+        'saveConfig',
+        'saveDistrict'
       ]),
       ...mapMutations('point', [
         'savePointData',
         'saveStatistic'
       ]),
       handleSearch () {
-        let config = {
-          month: new Date(this.form.date).getMonth() + 1,
-          day: new Date(this.form.date).getDate(),
-          time: this.form.time,
-          radius: this.form.r
-        }
-        this.saveConfig(config)
+        const config = this.handleConfig()
 
         this.saveRankList([])
         this.saveMapData([])
@@ -150,6 +156,20 @@
         this.fetchMapData({
           config: config
         })
+        this.fetchDistrictData({
+          config: config
+        })
+      },
+      handleConfig () {
+        let config = {
+          month: new Date(this.form.date).getMonth() + 1,
+          day: new Date(this.form.date).getDate(),
+          time: this.form.time,
+          radius: this.form.r,
+          heat: this.form.heat
+        }
+        this.saveConfig(config)
+        return config
       }
     }
   }

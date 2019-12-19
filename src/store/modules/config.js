@@ -1,11 +1,13 @@
 import * as listApi from '../../api/list'
 import * as mapApi from '../../api/map'
+import * as districtApi from '../../api/district'
 
 const state = {
   rankList: [],
   mapData: [],
   maxData: 0,
-  configs: {}
+  configs: {},
+  districtData: []
 }
 
 // actions
@@ -19,6 +21,12 @@ const actions = {
   fetchMapData ({commit}, {config}) {
     mapApi.fetchMapData(data => {
       commit('saveMapData', data)
+    }, config)
+  },
+  fetchDistrictData ({commit}, {config}) {
+    districtApi.fetchDistrictData(data => {
+      console.log(data)
+      commit('saveDistrictData', data.data)
     }, config)
   }
 }
@@ -36,6 +44,9 @@ const mutations = {
   },
   'saveConfig' (state, configs) {
     state.configs = configs
+  },
+  'saveDistrictData' (state, districtData) {
+    state.districtData = districtData
   }
 }
 

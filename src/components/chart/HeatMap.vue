@@ -108,6 +108,7 @@
         'savePointData',
       ]),
       getPointData (e) {
+        this.savePointData({pointData: [], statistic: null})
         this.point = e.point
         this.fetchPointData({
           config: {

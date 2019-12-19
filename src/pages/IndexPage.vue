@@ -3,8 +3,9 @@
     <layout>
       <div class="container">
         <div class="map-wrapper">
-          <div-header :header="'城市热力图'"></div-header>
-          <my-map></my-map>
+          <div-header :header="'城市地图'"></div-header>
+          <heat-map v-if="configs.heat"></heat-map>
+          <district-map v-else></district-map>
         </div>
 
         <div class="right-wrapper">
@@ -12,9 +13,13 @@
             <div-header :header="'自定义配置'"></div-header>
             <config></config>
           </div>
-          <div class="rank-wrapper">
+          <div class="rank-wrapper" v-if="configs.heat">
             <div-header :header="'地点热度排名'"></div-header>
             <rank-table></rank-table>
+          </div>
+          <div class="rank-wrapper" v-else>
+            <div-header :header="'区划热度排名'"></div-header>
+            <rank-district></rank-district>
           </div>
         </div>
       </div>
@@ -26,9 +31,12 @@
 <script>
   import Layout from '../components/layout/Layout.vue'
   import DivHeader from '../components/DivHeader.vue'
-  import MyMap from '../components/chart/Map.vue'
+  import HeatMap from '../components/chart/HeatMap.vue'
+  import DistrictMap from '../components/chart/DistrictMap.vue'
   import Config from '../components/config/Config.vue'
   import RankTable from '../components/rank/RankTable.vue'
+  import RankDistrict from '../components/rank/RankDistrict.vue'
+  import { mapState } from 'vuex'
 
   import { Message } from 'element-ui'
 
@@ -38,9 +46,16 @@
       Layout,
       Message,
       DivHeader,
-      MyMap,
+      HeatMap,
+      DistrictMap,
       Config,
-      RankTable
+      RankTable,
+      RankDistrict
+    },
+    computed: {
+      ...mapState('config', {
+        configs: state => state.configs
+      })
     },
     data () {
       return {}
