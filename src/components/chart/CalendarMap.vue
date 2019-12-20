@@ -1,6 +1,6 @@
 <template>
 
-  <div ref="calendarMap" :style="{width: '100%', height: '250px'}"></div>
+  <div ref="calendarMap" :style="{width: '100%', height: '240px'}"></div>
 
 </template>
 

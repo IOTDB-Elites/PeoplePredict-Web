@@ -17,7 +17,7 @@
           </div>
 
           <div class="rank-wrapper" v-if="!configs.heat">
-            <div-header :header="district + '人数变化趋势'"></div-header>
+            <div-header :header="district + '热度日历'"></div-header>
             <calendar-map></calendar-map>
           </div>
         </div>
@@ -31,6 +31,11 @@
           <div class="sub-district-wrapper">
             <div-header :header="district + '行业人数分布'"></div-header>
             <tree-map></tree-map>
+          </div>
+
+          <div class="sub-district-wrapper">
+            <div-header :header="district + '人群变化趋势'"></div-header>
+            <linear-chart></linear-chart>
           </div>
         </div>
       </div>
@@ -51,10 +56,12 @@
   import { mapState } from 'vuex'
 
   import { Message } from 'element-ui'
+  import LinearChart from '../components/chart/LinearChart.vue'
 
   export default {
     name: 'index-page',
     components: {
+      LinearChart,
       TreeMap,
       Layout,
       Message,

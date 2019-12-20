@@ -5,7 +5,8 @@ const state = {
   calendarData: [],
   maxDistrictData: 0,
   minDistrictData: 0,
-  districtTreemap: []
+  districtTreemap: [],
+  districtLine: []
 }
 
 // actions
@@ -19,6 +20,11 @@ const actions = {
   fetchDistrictTreemap ({commit}, {district}) {
     districtApi.fetchDistrictTreemap(data => {
       commit('saveDistrictTreemap', data.data)
+    }, district)
+  },
+  fetchDistrictLine ({commit}, {district}) {
+    districtApi.fetchDistrictLine(data => {
+      commit('saveDistrictLine', data.res)
     }, district)
   },
 }
@@ -35,6 +41,9 @@ const mutations = {
   },
   'saveDistrictTreemap' (state, districtTreemap) {
     state.districtTreemap = districtTreemap
+  },
+  'saveDistrictLine' (state, districtLine) {
+    state.districtLine = districtLine
   }
 }
 

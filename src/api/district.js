@@ -44,3 +44,17 @@ export function fetchDistrictTreemap (callback, name) {
       console.log(error)
     })
 }
+
+export function fetchDistrictLine (callback, name) {
+  axios.get('/get_district_line', {
+    params: {
+      name: name,
+    }
+  })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
