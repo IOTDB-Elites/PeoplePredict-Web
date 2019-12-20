@@ -53,12 +53,16 @@
     },
     methods: {
       ...mapActions('district', [
-        'fetchDistrictPoint'
+        'fetchDistrictPoint',
+        'fetchDistrictTreemap'
       ]),
       handleCurrentChange (val) {
         this.currentRow = val
         this.fetchDistrictPoint({
           district: val
+        })
+        this.fetchDistrictTreemap({
+          district: val.name
         })
       }
     }

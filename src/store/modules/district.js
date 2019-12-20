@@ -18,8 +18,8 @@ const actions = {
   },
   fetchDistrictTreemap ({commit}, {district}) {
     districtApi.fetchDistrictTreemap(data => {
-      commit('saveDistrictTreemap', data)
-    }, district.name)
+      commit('saveDistrictTreemap', data.data)
+    }, district)
   },
 }
 

@@ -15,6 +15,11 @@
             <div-header :header="'区划热度排名'"></div-header>
             <rank-district></rank-district>
           </div>
+
+          <div class="rank-wrapper" v-if="!configs.heat">
+            <div-header :header="district + '人数变化趋势'"></div-header>
+            <calendar-map></calendar-map>
+          </div>
         </div>
 
         <div class="map-wrapper" v-if="configs.heat">
@@ -26,11 +31,6 @@
           <div class="sub-district-wrapper">
             <div-header :header="district + '行业人数分布'"></div-header>
             <tree-map></tree-map>
-          </div>
-
-          <div class="sub-district-wrapper">
-            <div-header :header="district + '人数变化趋势'"></div-header>
-            <calendar-map></calendar-map>
           </div>
         </div>
       </div>
