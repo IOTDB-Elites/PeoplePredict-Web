@@ -16,3 +16,31 @@ export function fetchDistrictData (callback, config) {
       console.log(error)
     })
 }
+
+export function fetchDistrictPoint (callback, name) {
+  axios.get('/get_district_point', {
+    params: {
+      name: name,
+    }
+  })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+export function fetchDistrictTreemap (callback, name) {
+  axios.get('/get_district_treemap', {
+    params: {
+      name: name,
+    }
+  })
+    .then(function (response) {
+      callback(response.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

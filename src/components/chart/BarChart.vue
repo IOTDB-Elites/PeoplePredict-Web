@@ -5,9 +5,6 @@
 </template>
 
 <script type="text/babel">
-
-  import { mapState, mapActions } from 'vuex'
-  import { store } from '../../main'
   import echarts from 'echarts'
 
   export default {

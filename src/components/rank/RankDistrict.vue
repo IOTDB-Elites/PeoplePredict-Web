@@ -5,18 +5,20 @@
     </div>
     <div v-else>
       <el-table
+        ref="districtTable"
         :data="districtData"
         stripe
-        height="300"
+        highlight-current-row
+        @current-change="handleCurrentChange"
         style="width: 100%">
         <el-table-column
           type="index"
-          width="50">
+          width="100">
         </el-table-column>
         <el-table-column
           prop="name"
           label="区划"
-          width="230">
+          width="150">
         </el-table-column>
         <el-table-column
           prop="val"
@@ -31,7 +33,7 @@
 <script>
   import Vue from 'vue'
   import { Table, TableColumn } from 'element-ui'
-  import { mapState } from 'vuex'
+  import { mapActions, mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'RankTable',
@@ -40,13 +42,25 @@
       elTableColumn: TableColumn
     },
     data () {
-      return {}
+      return {
+        currentRow: this.districtData === undefined ? null : this.districtData[0]
+      }
     },
     computed: {
       ...mapState('config', {
         districtData: state => state.districtData
       })
     },
-    methods: {}
+    methods: {
+      ...mapActions('district', [
+        'fetchDistrictPoint'
+      ]),
+      handleCurrentChange (val) {
+        this.currentRow = val
+        this.fetchDistrictPoint({
+          district: val
+        })
+      }
+    }
   }
 </script>

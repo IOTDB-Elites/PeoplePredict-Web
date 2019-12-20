@@ -25,7 +25,6 @@ const actions = {
   },
   fetchDistrictData ({commit}, {config}) {
     districtApi.fetchDistrictData(data => {
-      console.log(data)
       commit('saveDistrictData', data.data)
     }, config)
   }

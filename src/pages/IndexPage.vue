@@ -2,12 +2,6 @@
   <div class="body-wrapper">
     <layout>
       <div class="container">
-        <div class="map-wrapper">
-          <div-header :header="'城市地图'"></div-header>
-          <heat-map v-if="configs.heat"></heat-map>
-          <district-map v-else></district-map>
-        </div>
-
         <div class="right-wrapper">
           <div class="config-wrapper">
             <div-header :header="'自定义配置'"></div-header>
@@ -22,6 +16,23 @@
             <rank-district></rank-district>
           </div>
         </div>
+
+        <div class="map-wrapper" v-if="configs.heat">
+          <div-header :header="'城市地图'"></div-header>
+          <heat-map></heat-map>
+        </div>
+
+        <div class="district-wrapper" v-if="!configs.heat">
+          <div class="sub-district-wrapper">
+            <div-header :header="district + '行业人数分布'"></div-header>
+            <tree-map></tree-map>
+          </div>
+
+          <div class="sub-district-wrapper">
+            <div-header :header="district + '人数变化趋势'"></div-header>
+            <calendar-map></calendar-map>
+          </div>
+        </div>
       </div>
     </layout>
   </div>
@@ -32,7 +43,8 @@
   import Layout from '../components/layout/Layout.vue'
   import DivHeader from '../components/DivHeader.vue'
   import HeatMap from '../components/chart/HeatMap.vue'
-  import DistrictMap from '../components/chart/DistrictMap.vue'
+  import CalendarMap from '../components/chart/CalendarMap.vue'
+  import TreeMap from '../components/chart/TreeMap.vue'
   import Config from '../components/config/Config.vue'
   import RankTable from '../components/rank/RankTable.vue'
   import RankDistrict from '../components/rank/RankDistrict.vue'
@@ -43,11 +55,12 @@
   export default {
     name: 'index-page',
     components: {
+      TreeMap,
       Layout,
       Message,
       DivHeader,
       HeatMap,
-      DistrictMap,
+      CalendarMap,
       Config,
       RankTable,
       RankDistrict
@@ -55,6 +68,9 @@
     computed: {
       ...mapState('config', {
         configs: state => state.configs
+      }),
+      ...mapState('district', {
+        district: state => state.district
       })
     },
     data () {

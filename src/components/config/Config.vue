@@ -136,7 +136,7 @@
         'saveMapData',
         'saveMaxData',
         'saveConfig',
-        'saveDistrict'
+        'saveDistrictData'
       ]),
       ...mapMutations('point', [
         'savePointData',
@@ -144,21 +144,24 @@
       ]),
       handleSearch () {
         const config = this.handleConfig()
+        if (this.form.heat) {
+          this.saveRankList([])
+          this.saveMapData([])
+          this.savePointData({pointData: [], statistic: null})
+          this.saveMaxData(0)
 
-        this.saveRankList([])
-        this.saveMapData([])
-        this.savePointData({pointData: [], statistic: null})
-        this.saveMaxData(0)
-
-        this.fetchRankList({
-          config: config
-        })
-        this.fetchMapData({
-          config: config
-        })
-        this.fetchDistrictData({
-          config: config
-        })
+          this.fetchRankList({
+            config: config
+          })
+          this.fetchMapData({
+            config: config
+          })
+        } else {
+          this.saveDistrictData([])
+          this.fetchDistrictData({
+            config: config
+          })
+        }
       },
       handleConfig () {
         let config = {

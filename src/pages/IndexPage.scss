@@ -8,9 +8,22 @@
   background-color: $white-color;
   display: inline-block;
   margin-top: 50px;
-  margin-right: 20px;
+  margin-left: 20px;
   padding: 20px;
   vertical-align: top;
+}
+
+.district-wrapper {
+  width: 60%;
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: top;
+
+  .sub-district-wrapper {
+    background-color: $white-color;
+    padding: 20px;
+    margin-top: 50px;
+  }
 }
 
 .right-wrapper {
